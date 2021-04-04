@@ -1,8 +1,6 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import AddIcon from '@material-ui/icons/Add';
+import { SpeedDialIcon_new } from './SpeedDialIcon_new';
 
 const styles = theme => ({
   root: {
@@ -34,32 +32,7 @@ const styles = theme => ({
   },
 });
 
-function SpeedDialIcon(props) {
-  const { classes, icon: iconProp, open, openIcon: openIconProp, ...other } = props;
-
-  const iconClassName = classNames(classes.icon, {
-    [classes.iconOpen]: open,
-    [classes.iconWithOpenIconOpen]: openIconProp && open,
-  });
-  const openIconClassName = classNames(classes.openIcon, { [classes.openIconOpen]: open });
-
-  function formatIcon(icon, className) {
-    if (React.isValidElement(icon)) {
-      return React.cloneElement(icon, { className });
-    }
-
-    return icon;
-  }
-
-  return (
-    <span className={classes.root} {...other}>
-      {openIconProp ? formatIcon(openIconProp, openIconClassName) : null}
-      {iconProp ? formatIcon(iconProp, iconClassName) : <AddIcon className={iconClassName} />}
-    </span>
-  );
-}
-
-SpeedDialIcon.propTypes = {
+SpeedDialIcon_new.propTypes = {
   /**
    * Useful to extend the style applied to components.
    */
@@ -79,6 +52,6 @@ SpeedDialIcon.propTypes = {
   openIcon: PropTypes.node,
 };
 
-SpeedDialIcon.muiName = 'SpeedDialIcon';
+SpeedDialIcon_new.muiName = 'SpeedDialIcon';
 
-export default withStyles(styles)(SpeedDialIcon);
+export default withStyles(styles)(SpeedDialIcon_new);

@@ -7,6 +7,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import clamp from '../utils/clamp';
+import { addEventListener_new } from './addEventListener_new';
 
 export const style = theme => {
   const commonTransitionsOptions = {
@@ -142,15 +143,6 @@ export const style = theme => {
     jumped: {},
   };
 };
-
-function addEventListener(node, event, handler, capture) {
-  node.addEventListener(event, handler, capture);
-  return {
-    remove: function remove() {
-      node.removeEventListener(event, handler, capture);
-    },
-  };
-}
 
 function percentToValue(percent, min, max) {
   return ((max - min) * percent) / 100 + min;
@@ -336,7 +328,7 @@ class Slider extends React.Component {
   handleTouchStart = event => {
     this.setState({ currentState: 'activated' });
 
-    this.globalMouseUpListener = addEventListener(document, 'touchend', this.handleMouseUp);
+    this.globalMouseUpListener = addEventListener_new(document, 'touchend', this.handleMouseUp);
 
     if (typeof this.props.onDragStart === 'function') {
       this.props.onDragStart(event);
@@ -346,8 +338,8 @@ class Slider extends React.Component {
   handleMouseDown = event => {
     this.setState({ currentState: 'activated' });
 
-    this.globalMouseUpListener = addEventListener(document, 'mouseup', this.handleMouseUp);
-    this.globalMouseMoveListener = addEventListener(document, 'mousemove', this.handleMouseMove);
+    this.globalMouseUpListener = addEventListener_new(document, 'mouseup', this.handleMouseUp);
+    this.globalMouseMoveListener = addEventListener_new(document, 'mousemove', this.handleMouseMove);
 
     if (typeof this.props.onDragStart === 'function') {
       this.props.onDragStart(event);
